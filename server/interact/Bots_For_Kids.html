@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Bots for Kids</title>
+  <script src="blockly_compressed.js"></script>
+  <script src="blocks_compressed.js"></script>
+  <script src="javascript_compressed.js"></script>
+  <script src="en.js"></script>
+  
+  
+  <script src="event.js"></script>
+  <script src="drive.js"></script>
+  <script src="sensors.js"></script>
+  <script src="custom_category.js"></script>
+
+  <script src="acorn_interpreter.js"></script>
+
+  <link rel="stylesheet" href="toolbox_style.css">
+  <link href='https://fonts.googleapis.com/css?family=Autour One' rel='stylesheet'>
+
+<body>
+<style>
+  html {
+   height: 100%;
+  }
+  body {
+   background: linear-gradient(to top left, #66ff33 0%, #3399ff 100%);
+  }
+</style>
+
+<h1 style="text-align:center; color: black; font-size: 45px; font-family: Autour One; padding-top: 10px; margin-bottom: 0px; margin-top: 0px;">
+  <i>Bots for Kids!</i>
+</h1>
+
+<div style="text-align: center;  padding: 0px; margin-bottom: 0px;">
+  <img src="all_robots2.png" style="height: 95px; width: 600px; "></img>
+</div>
+
+<div style="text-align: left; margin-bottom: 5px;">
+ <button onclick="runCode()" >
+ <b>Run</b>
+</button>
+</div>
+    
+<div id="blocklyDiv" style="height: 540px; width: 1500px; margin: 0; padding: 0;"></div>
+
+<xml xmlns="https://developers.google.com/blockly/xml" id="trial_toolbox" style="display: none; ">
+  <category name="Event" colour="#a55b80">
+    <block type="start"></block>
+    <field name="start the robot"></field>
+    <block type="stop"></block>
+    <field name="stop the robot"></field>
+  </category>
+
+  <category name="Drive" colour="#995ba5">
+    <block type="drive">
+      <field name="direction">f</field>
+      <field name="steps">0</field>
+    </block>
+    <block type="turn">
+      <field name="direction">r</field>
+    </block>
+    <block type="motors">
+      <field name="Sides">r</field>
+      <field name="Directions">f</field>
+      <field name="Speeds">0</field>
+    </block>
+  </category>
+
+  <category name="Sensors" colour="#6545cd">
+    <block type="ultrasonic">
+      <field name="number">0</field>
+      <field name="distance">0</field>
+    </block>
+    <block type="line_follower">
+      <field name="side">right</field>
+      <field name="colour">black</field>
+    </block>
+  </category>
+
+  <category name="Logic" colour="#5b80a5">
+    <block type="controls_if"></block>
+    <block type="logic_compare">
+      <field name="OP">EQ</field>
+    </block>
+    <block type="logic_operation">
+      <field name="OP">AND</field>
+    </block>
+    <block type="logic_negate"></block>
+    <block type="logic_boolean">
+      <field name="BOOL">TRUE</field>
+    </block>
+    <block type="logic_null"></block>
+    <block type="logic_ternary"></block>
+  </category>
+  <category name="Loop" colour="#5ba55b">
+    <block type="controls_repeat_ext">
+      <value name="TIMES">
+        <shadow type="math_number">
+          <field name="NUM">10</field>
+        </shadow>
+      </value>
+    </block>
+    <block type="controls_whileUntil">
+      <field name="MODE">WHILE</field>
+    </block>
+    <block type="controls_for">
+      <field name="VAR" id="GE`pc)2U@[?L?lo},s@z">i</field>
+      <value name="FROM">
+        <shadow type="math_number">
+          <field name="NUM">1</field>
+        </shadow>
+      </value>
+      <value name="TO">
+        <shadow type="math_number">
+          <field name="NUM">10</field>
+        </shadow>
+      </value>
+      <value name="BY">
+        <shadow type="math_number">
+          <field name="NUM">1</field>
+        </shadow>
+      </value>
+    </block>
+    <block type="controls_forEach">
+      <field name="VAR" id="f*yxlkW?Z5@Pn.wHR0MD">j</field>
+    </block>
+    <block type="controls_flow_statements">
+      <field name="FLOW">BREAK</field>
+    </block>
+  </category>
+  <category name="Text" colour="#5ba58c">
+    <block type="text">
+      <field name="TEXT"></field>
+    </block>
+    <block type="text_join">
+      <mutation items="2"></mutation>
+    </block>
+    <block type="text_append">
+      <field name="VAR" id="P@eEG_({#~X`Z$,LPAl_">item</field>
+      <value name="TEXT">
+        <shadow type="text">
+          <field name="TEXT"></field>
+        </shadow>
+      </value>
+    </block>
+    <block type="text_length">
+      <value name="VALUE">
+        <shadow type="text">
+          <field name="TEXT">abc</field>
+        </shadow>
+      </value>
+    </block>
+    <block type="text_isEmpty">
+      <value name="VALUE">
+        <shadow type="text">
+          <field name="TEXT"></field>
+        </shadow>
+      </value>
+    </block>
+    <block type="text_indexOf">
+      <field name="END">FIRST</field>
+      <value name="VALUE">
+        <block type="variables_get">
+          <field name="VAR" id="KY5KGQ}^4NQ,q/JxZ%A4">text</field>
+        </block>
+      </value>
+      <value name="FIND">
+        <shadow type="text">
+          <field name="TEXT">abc</field>
+        </shadow>
+      </value>
+    </block>
+    <block type="text_charAt">
+      <mutation at="true"></mutation>
+      <field name="WHERE">FROM_START</field>
+      <value name="VALUE">
+        <block type="variables_get">
+          <field name="VAR" id="KY5KGQ}^4NQ,q/JxZ%A4">text</field>
+        </block>
+      </value>
+    </block>
+    <block type="text_getSubstring">
+      <mutation at1="true" at2="true"></mutation>
+      <field name="WHERE1">FROM_START</field>
+      <field name="WHERE2">FROM_START</field>
+      <value name="STRING">
+        <block type="variables_get">
+          <field name="VAR" id="KY5KGQ}^4NQ,q/JxZ%A4">text</field>
+        </block>
+      </value>
+    </block>
+    <block type="text_changeCase">
+      <field name="CASE">UPPERCASE</field>
+      <value name="TEXT">
+        <shadow type="text">
+          <field name="TEXT">abc</field>
+        </shadow>
+      </value>
+    </block>
+    <block type="text_trim">
+      <field name="MODE">BOTH</field>
+      <value name="TEXT">
+        <shadow type="text">
+          <field name="TEXT">abc</field>
+        </shadow>
+      </value>
+    </block>
+    <block type="text_print">
+      <value name="TEXT">
+        <shadow type="text">
+          <field name="TEXT">abc</field>
+        </shadow>
+      </value>
+    </block>
+    <block type="text_prompt_ext">
+      <mutation type="TEXT"></mutation>
+      <field name="TYPE">TEXT</field>
+      <value name="TEXT">
+        <shadow type="text">
+          <field name="TEXT">abc</field>
+        </shadow>
+      </value>
+    </block>
+  </category>
+  <category name="Math" colour="#5b67a5">
+    <block type="math_number">
+      <field name="NUM">0</field>
+    </block>
+    <block type="math_arithmetic">
+      <field name="OP">ADD</field>
+      <value name="A">
+        <shadow type="math_number">
+          <field name="NUM">1</field>
+        </shadow>
+      </value>
+      <value name="B">
+        <shadow type="math_number">
+          <field name="NUM">1</field>
+        </shadow>
+      </value>
+    </block>
+    <block type="math_single">
+      <field name="OP">ROOT</field>
+      <value name="NUM">
+        <shadow type="math_number">
+          <field name="NUM">9</field>
+        </shadow>
+      </value>
+    </block>
+    <block type="math_trig">
+      <field name="OP">SIN</field>
+      <value name="NUM">
+        <shadow type="math_number">
+          <field name="NUM">45</field>
+        </shadow>
+      </value>
+    </block>
+    <block type="math_constant">
+      <field name="CONSTANT">PI</field>
+    </block>
+    <block type="math_number_property">
+      <mutation divisor_input="false"></mutation>
+      <field name="PROPERTY">EVEN</field>
+      <value name="NUMBER_TO_CHECK">
+        <shadow type="math_number">
+          <field name="NUM">0</field>
+        </shadow>
+      </value>
+    </block>
+    <block type="math_round">
+      <field name="OP">ROUND</field>
+      <value name="NUM">
+        <shadow type="math_number">
+          <field name="NUM">3.1</field>
+        </shadow>
+      </value>
+    </block>
+    <block type="math_on_list">
+      <mutation op="SUM"></mutation>
+      <field name="OP">SUM</field>
+    </block>
+    <block type="math_modulo">
+      <value name="DIVIDEND">
+        <shadow type="math_number">
+          <field name="NUM">64</field>
+        </shadow>
+      </value>
+      <value name="DIVISOR">
+        <shadow type="math_number">
+          <field name="NUM">10</field>
+        </shadow>
+      </value>
+    </block>
+    <block type="math_constrain">
+      <value name="VALUE">
+        <shadow type="math_number">
+          <field name="NUM">50</field>
+        </shadow>
+      </value>
+      <value name="LOW">
+        <shadow type="math_number">
+          <field name="NUM">1</field>
+        </shadow>
+      </value>
+      <value name="HIGH">
+        <shadow type="math_number">
+          <field name="NUM">100</field>
+        </shadow>
+      </value>
+    </block>
+    <block type="math_random_int">
+      <value name="FROM">
+        <shadow type="math_number">
+          <field name="NUM">1</field>
+        </shadow>
+      </value>
+      <value name="TO">
+        <shadow type="math_number">
+          <field name="NUM">100</field>
+        </shadow>
+      </value>
+    </block>
+    <block type="math_random_float"></block>
+  </category>
+
+  <category name="Colour" colour="#a5745b">
+    <block type="colour_picker">
+      <field name="COLOUR">#ff0000</field>
+    </block>
+    <block type="colour_random"></block>
+    <block type="colour_rgb">
+      <value name="RED">
+        <shadow type="math_number">
+          <field name="NUM">100</field>
+        </shadow>
+      </value>
+      <value name="GREEN">
+        <shadow type="math_number">
+          <field name="NUM">50</field>
+        </shadow>
+      </value>
+      <value name="BLUE">
+        <shadow type="math_number">
+          <field name="NUM">0</field>
+        </shadow>
+      </value>
+    </block>
+    <block type="colour_blend">
+      <value name="COLOUR1">
+        <shadow type="colour_picker">
+          <field name="COLOUR">#ff0000</field>
+        </shadow>
+      </value>
+      <value name="COLOUR2">
+        <shadow type="colour_picker">
+          <field name="COLOUR">#3333ff</field>
+        </shadow>
+      </value>
+      <value name="RATIO">
+        <shadow type="math_number">
+          <field name="NUM">0.5</field>
+        </shadow>
+      </value>
+    </block>
+  </category>
+  <category name="Variables" colour="#9fa55b" custom="VARIABLE"></category>
+
+</xml>
+
+
+
+<script>
+
+  var toolbox = document.getElementById("trial_toolbox");
+
+  var options = { 
+  toolbox : toolbox, 
+  collapse : true, 
+  comments : true, 
+  disable : true, 
+  maxBlocks : Infinity, 
+  trashcan : true, 
+  horizontalLayout : false, 
+  toolboxPosition : 'start', 
+  css : true, 
+  media : 'https://blockly-demo.appspot.com/static/media/', 
+  rtl : false, 
+  scrollbars : true, 
+  sounds : true, 
+  oneBasedIndex : true, 
+  grid : {
+    spacing : 20, 
+    length : 1, 
+    colour : '#888', 
+    snap : false
+  }, 
+  zoom : {
+    controls : true, 
+    wheel : true, 
+    startScale : 1, 
+    maxScale : 3, 
+    minScale : 0.3, 
+    scaleSpeed : 1.2
+  }
+};
+
+
+
+var Workspace = Blockly.inject('blocklyDiv', options,
+        {media: '../../media/',
+         toolbox: document.getElementById('trial_toolbox')});
+    Blockly.Xml.domToWorkspace(document.getElementById('trial_toolbox'),
+                               Workspace);
+
+var outputArea = document.getElementById('output');
+    var stepButton = document.getElementById('stepButton');
+    var myInterpreter = null;
+
+    function initApi(interpreter, globalObject) {
+      // Add an API function for the alert() block, generated for "text_print" blocks.
+      interpreter.setProperty(globalObject, 'alert',
+          interpreter.createNativeFunction(function(text) {
+        text = arguments.length ? text : '';
+        outputArea.value += '\n' + text;
+      }));
+
+      // Add an API function for the prompt() block.
+      var wrapper = function(text) {
+        return interpreter.createPrimitive(prompt(text));
+      };
+      interpreter.setProperty(globalObject, 'prompt',
+          interpreter.createNativeFunction(wrapper));
+
+      // Add an API function for highlighting blocks.
+      var wrapper = function(id) {
+        id = String(id || '');
+        return interpreter.createPrimitive(highlightBlock(id));
+      };
+      interpreter.setProperty(globalObject, 'highlightBlock',
+          interpreter.createNativeFunction(wrapper));
+    }
+
+function highlightBlock(id) {
+ Workspace.highlightBlock(id);
+ highlightPause = true;
+ }
+
+
+function runCode() {
+ Blockly.JavaScript.addReservedWords('code');
+ Blockly.JavaScript.STATEMENT_PREFIX = 'highlightBlock(%1);\n';
+ Blockly.JavaScript.addReservedWords('highlightBlock');
+ var code = Blockly.JavaScript.workspaceToCode(Workspace);
+  try {
+   eval(code);
+  } catch (e) {
+    alert(e);
+   }
+}
+
+
+</script>
+</body>
+</html>
